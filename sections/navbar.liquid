@@ -1,0 +1,240 @@
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Menu Items"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "Search Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "search_icon",
+      "label": "Search Icon"
+    },
+    {
+      "type": "range",
+      "id": "search_icon_width",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Search Icon width",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Hamburger Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "hamburger_icon",
+      "label": "Hamburger Icon"
+    },
+    {
+      "type": "range",
+      "id": "hamburger_icon_width",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Hamburger Icon width",
+      "default": 20
+    }
+  ]
+}
+{% endschema %}
+
+<header>
+  <div class="navbar">
+    <div class="container">
+      <div class="inner-nav">
+        <div class="nav">
+          <div class="in-left">
+            <div class="inl-img">
+              {% if section.settings.logo != blank %}
+                {{
+                  section.settings.logo
+                  | image_url: width: section.settings.logo_width
+                  | image_tag: width: section.settings.logo_width, height: 'auto', alt: shop.name
+                }}
+              {% else %}
+                <span class="h4">{{ shop.name }}</span>
+              {% endif %}
+            </div>
+          </div>
+          <div class="in-right">
+            <div class="inr-wrap">
+              <div class="inr-list">
+                <ul>
+                  {% for link in linklists[section.settings.menu].links %}
+                    {% if link.links != blank %}
+                      <li>
+                        <div class="nav-item">
+                          <a href="{{ link.url }}">{{ link.title }}</a>
+                          <div class="nav-drop">
+                            <div class="inner-nav-dropdown">
+                              {% if link.title == 'Motoring' %}
+                                <div class="nav-dropdown-right">
+                                  <div class="nav-dropdown-right-head">
+                                    <h3>GUIDES</h3>
+                                  </div>
+                                  <div class="nav-dropdown-right-text">
+                                    <ul>
+                                      {% for child_link in link.links %}
+                                        {% if forloop.index <= 4 %}
+                                          <li>{{ child_link.title }}</li>
+                                        {% endif %}
+                                      {% endfor %}
+                                    </ul>
+                                  </div>
+                                </div>
+                                <div class="nav-dropdown-left">
+                                  <div class="nav-dropdown-left-list">
+                                    <ul>
+                                      {% for child_link in link.links %}
+                                        {% if forloop.index > 4 and forloop.index <= 11 %}
+                                          <li>{{ child_link.title }}</li>
+                                        {% endif %}
+                                      {% endfor %}
+                                    </ul>
+                                  </div>
+                                  <div class="nav-dropdown-left-list">
+                                    <ul>
+                                      {% for child_link in link.links %}
+                                        {% if forloop.index > 11 %}
+                                          <li>{{ child_link.title }}</li>
+                                        {% endif %}
+                                      {% endfor %}
+                                    </ul>
+                                  </div>
+                                </div>
+                              {% endif %}
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    {% else %}
+                      <li>
+                        <a href="{{ link.url }}">{{ link.title }}</a>
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
+              <div class="nav-srch">
+                <div class="ns-img" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#navModal">
+                  {% if section.settings.search_icon != blank %}
+                    {{
+                      section.settings.search_icon
+                      | image_url: width: section.settings.search_icon_width
+                      | image_tag: width: section.settings.search_icon_width, height: 'auto', alt: 'Search'
+                    }}
+                  {% else %}
+                    <img src="{{ 'Nav-img.svg' | asset_url }}" width="auto" height="auto" alt="Search">
+                  {% endif %}
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="res-nav">
+          {% if section.settings.hamburger_icon != blank %}
+            {{
+              section.settings.hamburger_icon
+              | image_url: width: section.settings.hamburger_icon_width
+              | image_tag: width: section.settings.hamburger_icon_width, height: 'auto', alt: 'Menu'
+            }}
+          {% else %}
+            <img src="{{ 'burger-menu.svg' | asset_url }}" width="auto" height="auto" alt="Menu">
+          {% endif %}
+
+          <div class="rn-nav">
+            <div class="rnn-wrap">
+              <div class="rn-item">
+                <ul>
+                  {% for link in linklists[section.settings.menu].links %}
+                    {% if link.links != blank %}
+                      <li>
+                        <a href="{{ link.url }}">{{ link.title }}</a>
+                        <div class="nav-drop">
+                          <div class="inner-nav-dropdown">
+                            {% if link.title == 'Motoring' %}
+                              <div class="nav-dropdown-right">
+                                <div class="nav-dropdown-right-head">
+                                  <h3>GUIDES</h3>
+                                </div>
+                                <div class="nav-dropdown-right-text">
+                                  <ul>
+                                    {% for child_link in link.links %}
+                                      {% if forloop.index <= 4 %}
+                                        <li>{{ child_link.title }}</li>
+                                      {% endif %}
+                                    {% endfor %}
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="nav-dropdown-left">
+                                <div class="nav-dropdown-left-list">
+                                  <ul>
+                                    {% for child_link in link.links %}
+                                      {% if forloop.index > 4 and forloop.index <= 11 %}
+                                        <li>{{ child_link.title }}</li>
+                                      {% endif %}
+                                    {% endfor %}
+                                  </ul>
+                                </div>
+                                <div class="nav-dropdown-left-list">
+                                  <ul>
+                                    {% for child_link in link.links %}
+                                      {% if forloop.index > 11 %}
+                                        <li>{{ child_link.title }}</li>
+                                      {% endif %}
+                                    {% endfor %}
+                                  </ul>
+                                </div>
+                              </div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </li>
+                    {% else %}
+                      <li>
+                        <a href="{{ link.url }}">{{ link.title }}</a>
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
