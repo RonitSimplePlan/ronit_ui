@@ -1,11 +1,71 @@
 {
     "sections": {
-        "section1": {
-            "type": "homepage"
+        "home-banner": {
+            "type": "home-banner",
+            "settings": {
+                "hero_image": "shopify://shop_images/Rectangle_115.png?v=1726829304"
+            }
+        },
+        "home-section1": {
+            "type": "home-section1",
+            "blocks": {
+                "insurance_1": {
+                    "type": "insurance_type",
+                    "settings": {
+                        "insurance_icon": "shopify://shop_images/img1.svg?v=1726832033",
+                        "insurance_type": "Free shipping"
+                    }
+                },
+                "insurance_2": {
+                    "type": "insurance_type",
+                    "settings": {
+                        "insurance_icon": "shopify://shop_images/img1.svg?v=1726832033",
+                        "insurance_type": "Free shipping"
+                    }
+                },
+                "insurance_3": {
+                    "type": "insurance_type",
+                    "settings": {
+                        "insurance_icon": "shopify://shop_images/img1.svg?v=1726832033",
+                        "insurance_type": "Free shipping"
+                    }
+                },
+                "insurance_4": {
+                    "type": "insurance_type",
+                    "settings": {
+                        "insurance_icon": "shopify://shop_images/img1.svg?v=1726832033",
+                        "insurance_type": "Free shipping"
+                    }
+                },
+                "insurance_5": {
+                    "type": "insurance_type",
+                    "settings": {
+                        "insurance_icon": "shopify://shop_images/img1.svg?v=1726832033",
+                        "insurance_type": "Free shipping"
+                    }
+                },
+            },
+            "block_order": [
+                "insurance_1",
+                "insurance_2",
+                "insurance_3",
+                "insurance_4",
+                "insurance_5"
+            ]
+        },
+        "home-contact": {
+            "type": "home-contact"
         }
+        // "home-section2": {
+        //     "type": "home-section2"
+        // },
+        // "home-section3": {
+        //     "type": "home-section3"
+        // },
     },
-
-    "order":[
-        "section1"
+    "order": [
+        "home-banner",
+        "home-section1",
+        "home-contact"
     ]
-}    
+}

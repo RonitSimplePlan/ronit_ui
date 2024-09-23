@@ -1,0 +1,136 @@
+<section>
+  <div class="hero-wrapper">
+    <div class="container">
+      <div class="inner-hero-wrapper">
+        <div class="hero-left">
+          <div class="hero-head-wrapper" data-aos="fade-right">
+            <div class="hero-head-title">
+              <h1>{{ section.settings.hero_title }}</h1>
+            </div>
+            <div class="hero-head-text">
+              <p>{{ section.settings.hero_description }}</p>
+            </div>
+            <div class="hero-points">
+              {% for block in section.blocks limit: 2 %}
+                {% if block.type == 'hero_point' %}
+                  <div class="hero-point" {{ block.shopify_attributes }}>
+                    <div class="point-img {{ block.settings.point_color }}">
+                      {{
+                        block.settings.point_icon
+                        | image_url: width: 24
+                        | image_tag: loading: 'lazy', alt: block.settings.point_text
+                      }}
+                    </div>
+                    <div class="point-text {{ block.settings.point_color }}">
+                      <p>{{ block.settings.point_text }}</p>
+                    </div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <div class="hero-btn">
+              <a href="{{ section.settings.cta_link }}">{{ section.settings.cta_text }}</a>
+            </div>
+          </div>
+        </div>
+        <div class="hero-right" data-aos="fade-left">
+          <div class="hr-wrap">
+            <div class="hero-right-img">
+              {{
+                section.settings.hero_image
+                | image_url: width: 600
+                | image_tag: loading: 'lazy', alt: section.settings.hero_title
+              }}
+            </div>
+            <div class="hero-bg"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "max_blocks": 2,
+  "settings": [
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero Title",
+      "default": "It's always the right time to get an Insurance"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_description",
+      "label": "Hero Description",
+      "default": "Insurance is protecting them. Get quick and cheap insurance quotes from leading insurance providers."
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "Get Quotes"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero_point",
+      "name": "Hero Point",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "point_icon",
+          "label": "Point Icon"
+        },
+        {
+          "type": "text",
+          "id": "point_text",
+          "label": "Point Text"
+        },
+        {
+          "type": "select",
+          "id": "point_color",
+          "label": "Point Color",
+          "options": [
+            {
+              "value": "green",
+              "label": "Green"
+            },
+            {
+              "value": "orange",
+              "label": "Orange"
+            }
+          ],
+          "default": "green"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner",
+      "blocks": [
+        {
+          "type": "hero_point"
+        },
+        {
+          "type": "hero_point"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

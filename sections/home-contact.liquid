@@ -1,0 +1,126 @@
+<section>
+  <div class="contact-wrapper">
+    <div class="container">
+      <div class="inner-contact-wrapper">
+        <div class="contact-header" data-aos="fade-up">
+          <h2>{{ section.settings.section_title }}</h2>
+          <p>{{ section.settings.section_description }}</p>
+        </div>
+        <div class="contact-form" data-aos="fade-up">
+          {% form 'contact' %}
+            {{ form.errors | default_errors }}
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="first-name">{{ section.settings.first_name_label }}</label>
+                <input type="text" name="contact[first_name]" id="first-name" />
+              </div>
+              <div class="form-group">
+                <label for="last-name">{{ section.settings.last_name_label }}</label>
+                <input type="text" name="contact[last_name]" id="last-name" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">{{ section.settings.phone_label }}</label>
+                <input type="tel" name="contact[phone]" id="phone" />
+              </div>
+              <div class="form-group">
+                <label for="email">{{ section.settings.email_label }}</label>
+                <input type="email" name="contact[email]" id="email" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full-width">
+                <label for="order-number">{{ section.settings.order_number_label }}</label>
+                <input type="text" name="contact[order_number]" id="order-number" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full-width">
+                <label for="message">{{ section.settings.message_label }}</label>
+                <textarea name="contact[body]" id="message"></textarea>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full-width">
+                <button type="submit" class="submit-btn">{{ section.settings.submit_button_text }}</button>
+              </div>
+            </div>
+          {% endform %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact Form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Contact Us"
+    },
+    {
+      "type": "textarea",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "Have questions? We're here to help."
+    },
+    {
+      "type": "text",
+      "id": "first_name_label",
+      "label": "First Name Label",
+      "default": "First name"
+    },
+    {
+      "type": "text",
+      "id": "last_name_label",
+      "label": "Last Name Label",
+      "default": "Last name"
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "Phone Label",
+      "default": "Phone"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email Label",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "order_number_label",
+      "label": "Order Number Label",
+      "default": "Order number"
+    },
+    {
+      "type": "text",
+      "id": "message_label",
+      "label": "Message Label",
+      "default": "Message"
+    },
+    {
+      "type": "text",
+      "id": "submit_button_text",
+      "label": "Submit Button Text",
+      "default": "Send Message"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Form"
+    }
+  ]
+}
+{% endschema %}

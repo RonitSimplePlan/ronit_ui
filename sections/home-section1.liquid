@@ -1,0 +1,66 @@
+<section>
+  <div class="sec2-wrapper">
+    <div class="container">
+      <div class="inner-sec2-wrapper">
+        {% for block in section.blocks %}
+          {% if block.type == 'insurance_type' %}
+            <div class="sec2-elem" data-aos="flip-left" {{ block.shopify_attributes }}>
+              <div class="sec2-elem-img">
+                {{ block.settings.insurance_icon | image_url: width: 100 | image_tag: loading: 'lazy', alt: block.settings.insurance_type }}
+              </div>
+              <div class="sec2-elem-text">
+                <p>{{ block.settings.insurance_type }}</p>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Insurance Types",
+  "max_blocks": 10,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "insurance_type",
+      "name": "Insurance Type",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "insurance_icon",
+          "label": "Insurance Icon"
+        },
+        {
+          "type": "text",
+          "id": "insurance_type",
+          "label": "Insurance Type",
+          "default": "Car Insurance"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Insurance Types",
+      "blocks": [
+        {
+          "type": "insurance_type"
+        },
+        {
+          "type": "insurance_type"
+        },
+        {
+          "type": "insurance_type"
+        },
+        {
+          "type": "insurance_type"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
